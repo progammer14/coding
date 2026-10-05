@@ -1,31 +1,47 @@
-#include <iostream> 
+#include <iostream>
 using namespace std;
 
-int main () {
-    int n;
-    cin >> n;
-    for ( int i = 1; i <= n; i++ ) {
+int main() {
+    int n, guess, maxattemps, score;
+    bool haswon = 0;
+    char choice;
 
-         for ( int j = 1; j <= n-i; j++) {
-            cout << " ";
-         }
+    do {    
+        int times = 0;
+        cout << "pick a secret number: ";
+        cin >> n;
+        cout << "max attemps = ";
+        cin >> maxattemps;
 
-         for( int k = 1 ; k <= i; k++ ) {
-            cout << "x";
-         }
-         cout << endl;
-    }
-    for ( int i = 1; i <= n - 1; i++) {
+        do {
+            if ( times == maxattemps) {
+                cout << "you lose, the number is " << n << endl;
+                break;
+            }
+            times++;
 
-        for ( int j = 1; j <= i; j++) {
-            cout << " ";
+            cout << "your guess = ";
+            cin >> guess;
+
+            if ( guess > n) cout << "too high" << endl;
+            else if ( guess < n) cout << "too low" << endl;
+            else cout << "correct" << endl;
+
+        } while ( guess != n);
+
+        if ( guess == n) {
+            if ( !haswon || times < score) {
+                score = times;
+                haswon = 1;
+            }
         }
 
-        for ( int k = 1; k <= n - i; k++) {
-            cout << "x";
-        }
-        cout << endl;
-    }
+        cout << "click c to continue or others to stop: ";
+        cin >> choice; 
+    } while ( choice == 'c'); 
+    
+    if ( haswon == 1) cout << "Best score = " << score;
+    else cout << "You haven't win any round yet";
 
     return 0;
 }
