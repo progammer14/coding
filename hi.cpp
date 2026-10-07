@@ -1,47 +1,35 @@
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 
 int main() {
-    int n, guess, maxattemps, score;
-    bool haswon = 0;
-    char choice;
+    double a, b, c;
+    cin >> a >> b >> c;
+    double p = (a + b + c)/ 2;
+    cout << fixed << setprecision(2);
+        if (a < 0 || b < 0 || c < 0 || a + b <= c || a + c <= b || b + c <= a) cout << "Khong phai tam giac" << endl;
+        else {
 
-    do {    
-        int times = 0;
-        cout << "pick a secret number: ";
-        cin >> n;
-        cout << "max attemps = ";
-        cin >> maxattemps;
+            if ( a == b && a == c) {
+                cout << "Tam giac deu, dien tich = " << sqrt(p*(p-a)*(p-b)*(p-c)) << endl; 
+            } 
 
-        do {
-            if ( times == maxattemps) {
-                cout << "you lose, the number is " << n << endl;
-                break;
+            else if ( a == b || a == c || b == c) {
+                    cout << "Tam giac can, dien tich = " << sqrt(p*(p-a)*(p-b)*(p-c)) << endl;
+                }
+
+            else if ( a*a + b*b == c*c || a*a + c*c == b*b || b*b + c*c == a*a ) {
+                cout << "Tam giac vuong, dien tich = " << sqrt(p*(p-a)*(p-b)*(p-c)) << endl;
             }
-            times++;
-
-            cout << "your guess = ";
-            cin >> guess;
-
-            if ( guess > n) cout << "too high" << endl;
-            else if ( guess < n) cout << "too low" << endl;
-            else cout << "correct" << endl;
-
-        } while ( guess != n);
-
-        if ( guess == n) {
-            if ( !haswon || times < score) {
-                score = times;
-                haswon = 1;
-            }
-        }
-
-        cout << "click c to continue or others to stop: ";
-        cin >> choice; 
-    } while ( choice == 'c'); 
+            
+            else cout << "Tam giac thuong, dien tich = " << sqrt(p*(p-a)*(p-b)*(p-c)) << endl;
+        } 
     
-    if ( haswon == 1) cout << "Best score = " << score;
-    else cout << "You haven't win any round yet";
+
+    
 
     return 0;
 }
+
+
